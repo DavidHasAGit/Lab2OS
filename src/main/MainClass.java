@@ -1,11 +1,11 @@
-package forMain;
+package main;
 
-import forBook.Book;
+import model.Book;
 
 import java.util.Scanner;
 
 public class MainClass {
-
+    static Scanner scan = new Scanner(System.in);
     public static void main(String[] args) {
         Book[] books = new Book[3];
         books[0] = new Book(15107, "The Great Reset", "Alex Jones", "Skyhorse", 2022, 264, 600.25);
@@ -18,21 +18,20 @@ public class MainClass {
                 same publisher - print P,
                 the publication year is later than you have chosen - print Y.
                 Your choice: """);
-        Scanner scan = new Scanner(System.in);
 
         switch (scan.nextLine()) {
-            case "A" -> checkByAuthor(scan, books);
-            case "P" -> checkByPublisher(scan, books);
-            case "Y" -> checkByYear(scan, books);
+            case "A" -> checkByAuthor(books);
+            case "P" -> checkByPublisher(books);
+            case "Y" -> checkByYear(books);
             default -> System.out.println("There is no such choice");
         }
     }
 
-    public static void checkByAuthor(Scanner scan, Book[] books){
+    public static void checkByAuthor(Book[] books){
         System.out.print("Print name of author: ");
         String author = scan.nextLine();
         boolean bookIs = false;
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < books.length; i++)
         {
             if (books[i].getAuthor().equals(author))
             {
@@ -44,7 +43,7 @@ public class MainClass {
             System.out.print("There are no books with this author");
         }
     }
-    public static void checkByPublisher(Scanner scan, Book[] books){
+    public static void checkByPublisher(Book[] books){
         System.out.print("Print name of publisher: ");
         String publisher = scan.nextLine();
         boolean bookIs = false;
@@ -60,7 +59,7 @@ public class MainClass {
             System.out.print("There are no books with this author");
         }
     }
-    public static void checkByYear(Scanner scan, Book[] books){
+    public static void checkByYear(Book[] books){
         System.out.print("Print the year of publication and I will print the books that came out later: ");
         int year = scan.nextInt();
         while (year > 2022 || year < 868){
