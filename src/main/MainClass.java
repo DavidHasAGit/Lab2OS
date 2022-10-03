@@ -31,34 +31,51 @@ public class MainClass {
     public static void checkByAuthor(Scanner scan, Book[] books){
         System.out.print("Print name of author: ");
         String author = scan.nextLine();
+        boolean bookIs = false;
         for (int i = 0; i < 3; i++)
         {
             if (books[i].getAuthor().equals(author))
             {
-                System.out.println(books[i].toString());
+                System.out.println(books[i]);
+                bookIs = true;
             }
+        }
+        if (!bookIs){
+            System.out.print("There are no books with this author");
         }
     }
     public static void checkByPublisher(Scanner scan, Book[] books){
         System.out.print("Print name of publisher: ");
         String publisher = scan.nextLine();
-        for (int i = 0; i < 3; i++)
+        boolean bookIs = false;
+        for (int i = 0; i < books.length; i++)
         {
             if (books[i].getPublisher().equals(publisher))
             {
                 System.out.println(books[i].toString());
+                bookIs = true;
             }
+        }
+        if (!bookIs){
+            System.out.print("There are no books with this author");
         }
     }
     public static void checkByYear(Scanner scan, Book[] books){
         System.out.print("Print the year of publication and I will print the books that came out later: ");
         int year = scan.nextInt();
-        for (int i = 0; i < 3; i++)
-        {
-            if (books[i].getYear() > year)
-            {
-                System.out.println(books[i].toString());
+        while (year > 2022 || year < 868){
+            System.out.print("Invalid year. Try again: ");
+            year = scan.nextInt();
+        }
+        boolean bookIs = false;
+        for (Book book : books) {
+            if (book.getYear() > year) {
+                System.out.println(book);
+                bookIs = true;
             }
+        }
+        if (!bookIs){
+            System.out.print("There are no books with this author");
         }
     }
 }
